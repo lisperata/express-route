@@ -1,34 +1,18 @@
 import express, { Request, Response } from "express";
-
-import {
-  deleteUser,
-  getUsers,
-  postUser,
-  putUser,
-} from "../controller";
+import { postContact, putContact } from "../controller/contact";
 
 const router = express.Router();
 
-router.get("/", async (_req: Request, res: Response) => {
-  await getUsers(res);
+router.post("/contacts", async (req: Request, res: Response) => {
+  const { name, email } = req.body;
+
+  await postContact(res, name, email);
 });
 
-router.post("/post", async (req: Request, res: Response) => {
-  const { id, name, age } = req.body;
+router.patch("/contacts", async (req: Request, res: Response) => {
+  const { name, email, uuid } = req.body;
 
-  await postUser(res, id, name, age);
-});
-
-router.put("/put", async (req: Request, res: Response) => {
-  const { id, name, age } = req.body;
-
-  await putUser(res, id, name, age);
-});
-
-router.delete("/delete", async (req: Request, res: Response) => {
-  const { id } = req.body;
-
-  await deleteUser(res, id);
+  await putContact(res, name, email, uuid);
 });
 
 export default router;

@@ -1,11 +1,11 @@
 import express from "express";
-import router from "./routes";
+import conactRouter from "./contact/contactRoutes";
 
 import { PORT } from "./infrastructureVariables";
 const app = express();
 
 app.use(express.urlencoded());
-app.use(router);
+app.use(conactRouter);
 
 app.listen(PORT, () => {
   console.log();

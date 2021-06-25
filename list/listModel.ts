@@ -1,16 +1,16 @@
-import pkg from "sequelize";
-const { DataTypes } = pkg;
-import sequelize from "./index";
+import Sequelize from "sequelize";
+import sequelize from "../database/config";
 
 const listSequelize = sequelize.define("contact", {
   uuid: {
-    type: "VARCHAR(36)",
+    type: Sequelize.UUID,
     primaryKey: true,
+    defaultValue: Sequelize.UUIDV4,
     allowNull: false,
     unique: true,
   },
   name: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
 });

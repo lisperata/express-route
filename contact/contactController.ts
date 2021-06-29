@@ -1,5 +1,5 @@
-import { Response } from "express";
-import Contact from "./сontactService";
+import { Response } from 'express';
+import Contact from './сontactService';
 
 export const postContact = async (
   res: Response,
@@ -12,9 +12,9 @@ export const postContact = async (
     await contact.addContactWithSequelize();
     //with query
     //await contact.addContact();
-    res.type("plain").status(201).send("Data has been successfully added");
+    res.type('plain').status(201).send('Data has been successfully added');
   } catch (err) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).send('Internal Server Error');
   }
 };
 
@@ -31,8 +31,8 @@ export const putContact = async (
     //with query
     //await contact.changeContactById();
 
-    res.type("plain").send("Data has been successfully changed");
+    res.type('plain').send('Data has been successfully changed');
   } catch (err) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).send('Internal Server Error');
   }
 };

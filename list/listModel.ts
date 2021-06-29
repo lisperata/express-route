@@ -1,7 +1,7 @@
-import Sequelize from "sequelize";
-import sequelize from "../database/config";
+import Sequelize from 'sequelize';
+import sequelize from '../database/config';
 
-const listSequelize = sequelize.define("contact", {
+const listModel = sequelize.define('lists', {
   uuid: {
     type: Sequelize.UUID,
     primaryKey: true,
@@ -15,4 +15,4 @@ const listSequelize = sequelize.define("contact", {
   },
 });
 
-export default listSequelize;
+export default listModel;

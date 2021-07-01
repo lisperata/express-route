@@ -2,10 +2,8 @@ import { Response } from 'express';
 import List from './listService';
 
 export const postList = async (res: Response, name: string): Promise<void> => {
-  const list = new List(name);
   try {
-    await list.addNewList();
-    await list.addContactToList();
+    await List.addNewList(name);
     res.type('plain').status(201).send('Data has been successfully added');
   } catch (err) {
     res.status(500).send('Internal Server Error');
@@ -14,12 +12,11 @@ export const postList = async (res: Response, name: string): Promise<void> => {
 
 export const changeTheListInContact = async (
   res: Response,
-  name: string,
-  uuid: string
+  nameOfList: string,
+  uuidOfContact: string
 ): Promise<void> => {
-  const list = new List(name, uuid);
   try {
-    await list.addContactToList();
+    await List.addContactToList(uuidOfContact, nameOfList);
     res.type('plain').status(200).send('Data has been successfully changed');
   } catch (err) {
     res.status(500).send('Internal Server Error');
@@ -31,7 +28,9 @@ export const getContactsByListId = async (
   uuid: string
 ): Promise<void> => {
   try {
-    const contacts = JSON.stringify(await List.getContactsOfListByListId(uuid));
+    const contacts: string = JSON.stringify(
+      await List.getContactsOfListByListId(uuid)
+    );
     res.type('json').status(200).send(contacts);
   } catch (err) {
     res.status(500).send('Internal Server Error');

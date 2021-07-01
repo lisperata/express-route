@@ -4,20 +4,6 @@ import { NewContactInPatchType } from './contactInterfaces';
 import contactModel from './contactModel';
 
 class Contact {
-  private uuid: string;
-  private name: string;
-  private email: string;
-
-  public constructor(
-    name: string = '',
-    email: string = '',
-    uuid: string = uuidv4()
-  ) {
-    this.uuid = uuid;
-    this.name = name;
-    this.email = email;
-  }
-
   public static async getContactsOfList(listId: string): Promise<string> {
     return JSON.stringify(
       await contactModel.findAll({
@@ -28,15 +14,18 @@ class Contact {
     );
   }
 
-  public async addContactWithSequelize(): Promise<void> {
-    const { name, email } = this;
-
+  public static async addContactWithSequelize(
+    name: string,
+    email: string
+  ): Promise<void> {
     await contactModel.create({ name, email });
   }
 
-  public async changeContactByIdWithSequelize(): Promise<void> {
-    const { name, email, uuid } = this;
-
+  public static async changeContactByIdWithSequelize(
+    name: string,
+    email: string,
+    uuid: string
+  ): Promise<void> {
     const newContact: NewContactInPatchType = {};
     name ? (newContact.name = name) : '';
     email ? (newContact.email = email) : '';
@@ -48,8 +37,11 @@ class Contact {
     });
   }
 
-  public async addContact(): Promise<void> {
-    const { uuid, name, email } = this;
+  public static async addContact(
+    name: string,
+    email: string,
+    uuid: string
+  ): Promise<void> {
     const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     await sequelize.query(
@@ -57,8 +49,11 @@ class Contact {
     );
   }
 
-  public async changeContactById(): Promise<void> {
-    const { uuid, name, email } = this;
+  public async changeContactById(
+    name: string,
+    email: string,
+    uuid: string
+  ): Promise<void> {
     const nameForQuery = name
       ? this._convertParameterToQuery('name', name)
       : '';
@@ -69,7 +64,6 @@ class Contact {
       this._getTheStringToUpdateQuery(uuid, nameForQuery, emailForQuery)
     );
   }
-
   private _convertParameterToQuery(
     nameOfParameter: string,
     parameter: string

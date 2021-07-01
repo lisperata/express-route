@@ -1,5 +1,9 @@
 import express, { Request, Response } from 'express';
-import { changeTheListInContact, getContactsByListId, postList } from './listController';
+import {
+  changeTheListInContact,
+  getContactsByListId,
+  postList,
+} from './listController';
 
 const listRouter = express.Router();
 
@@ -16,9 +20,9 @@ listRouter.post('/lists', async (req: Request, res: Response) => {
 });
 
 listRouter.patch('/list', async (req: Request, res: Response) => {
-  const { name, uuid } = req.body;
+  const { nameOfList, uuidOfContact } = req.body;
 
-  await changeTheListInContact(res, name, uuid);
+  await changeTheListInContact(res, nameOfList, uuidOfContact);
 });
 
 export default listRouter;

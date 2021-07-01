@@ -1,27 +1,15 @@
 import listModel from './listModel';
 import Contact from '../contact/сontactService';
 class List {
-  private uuid: string;
-  private name: string;
-
-  public constructor(name: string = '', uuid: string = '') {
-    this.name = name;
-    this.uuid = uuid;
-  }
-
-  static async getContactsOfListByListId(listId: string): Promise<string> {
+  public static async getContactsOfListByListId(listId: string): Promise<string> {
     return await Contact.getContactsOfList(listId);
   }
 
-  public async addNewList(): Promise<void> {
-    const name = this.name;
+  public static async addNewList(name: string): Promise<void> {
     await listModel.create({ name });
   }
 
-  public async addContactToList(): Promise<void> {
-    const uuidOfContact: string = this.uuid;
-    const nameOfList: string = this.name;
-
+  public static async addContactToList(uuidOfContact: string, nameOfList: string): Promise<void> {
     const listWithTheSearchedName = await listModel.findOne({
       attributes: ['uuid'],
       where: { name: nameOfList },

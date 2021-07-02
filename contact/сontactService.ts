@@ -1,12 +1,11 @@
-import { v4 as uuidv4 } from 'uuid';
 import sequelize from '../database/config';
 import { NewContactInPatchType } from './contactInterfaces';
-import contactModel from './contactModel';
+import Contact from './contactModel';
 
-class Contact {
+class ContactService {
   public static async getContactsOfList(listId: string): Promise<string> {
     return JSON.stringify(
-      await contactModel.findAll({
+      await Contact.findAll({
         attributes: ['uuid', 'name', 'email'],
         where: { listId },
         raw: true,
@@ -18,7 +17,7 @@ class Contact {
     name: string,
     email: string
   ): Promise<void> {
-    await contactModel.create({ name, email });
+    await Contact.create({ name, email });
   }
 
   public static async changeContactByIdWithSequelize(
@@ -30,7 +29,7 @@ class Contact {
     name ? (newContact.name = name) : '';
     email ? (newContact.email = email) : '';
 
-    await contactModel.update(newContact, {
+    await Contact.update(newContact, {
       where: {
         uuid,
       },
@@ -82,7 +81,7 @@ class Contact {
   }
 
   public static async addContactToList(contactId: string, listId: string) {
-    await contactModel.update(
+    await Contact.update(
       { listId },
       {
         where: {
@@ -93,4 +92,4 @@ class Contact {
   }
 }
 
-export default Contact;
+export default ContactService;

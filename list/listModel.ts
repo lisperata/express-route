@@ -1,7 +1,8 @@
 import Sequelize from 'sequelize';
 import sequelize from '../database/config';
+import { IListModel } from './listInterfaces';
 
-const listModel = sequelize.define('lists', {
+const List = sequelize.define<IListModel>('lists', {
   uuid: {
     type: Sequelize.UUID,
     primaryKey: true,
@@ -15,4 +16,4 @@ const listModel = sequelize.define('lists', {
   },
 });
 
-export default listModel;
+export default List;

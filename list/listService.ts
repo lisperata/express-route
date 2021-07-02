@@ -1,24 +1,38 @@
-import listModel from './listModel';
-import Contact from '../contact/сontactService';
-class List {
-  public static async getContactsOfListByListId(listId: string): Promise<string> {
-    return await Contact.getContactsOfList(listId);
+import List from './listModel';
+import Contact from '../contact/contactModel';
+class ListService {
+  public static async getContactsOfListByListId(
+    listId: string
+  ): Promise<string> {
+    const list = await List.findByPk(listId);
+
+    if (!list) {
+      throw new Error();
+    }
+
+    return await list.getContacts({
+      attributes: ['name', 'email'],
+      joinTableAttributes: ['listUuid'],
+    });
   }
 
   public static async addNewList(name: string): Promise<void> {
-    await listModel.create({ name });
+    await List.create({ name });
   }
 
-  public static async addContactToList(uuidOfContact: string, nameOfList: string): Promise<void> {
-    const listWithTheSearchedName = await listModel.findOne({
-      attributes: ['uuid'],
-      where: { name: nameOfList },
-    });
+  public static async addContactToList(
+    uuidOfContact: string,
+    uuidOfList: string
+  ): Promise<void> {
+    const list = await List.findByPk(uuidOfList);
+    const contact = await Contact.findByPk(uuidOfContact);
 
-    const idOfSearchedList: string = listWithTheSearchedName?.get().uuid;
+    if (!list || !contact) {
+      throw new Error();
+    }
 
-    await Contact.addContactToList(uuidOfContact, idOfSearchedList);
+    await list.addContact(contact);
   }
 }
 
-export default List;
+export default ListService;

@@ -15,14 +15,13 @@ listRouter.post('/list', async (req: Request, res: Response) => {
 
 listRouter.post('/lists', async (req: Request, res: Response) => {
   const { uuid } = req.body;
-
   await getContactsByListId(res, uuid);
 });
 
 listRouter.patch('/list', async (req: Request, res: Response) => {
-  const { nameOfList, uuidOfContact } = req.body;
+  const { uuidOfList, uuidOfContact } = req.body;
 
-  await changeTheListInContact(res, nameOfList, uuidOfContact);
+  await changeTheListInContact(res, uuidOfList, uuidOfContact);
 });
 
 export default listRouter;

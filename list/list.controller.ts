@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import ListService from './listService';
+import ListService from './list.services';
 
 export const postList = async (res: Response, name: string): Promise<void> => {
   try {

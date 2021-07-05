@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 import sequelize from '../database/config';
-import { IListModel } from './listInterfaces';
+import { IListModel } from './list.interfaces';
 
 const List = sequelize.define<IListModel>('lists', {
   uuid: {

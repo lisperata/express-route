@@ -1,10 +1,10 @@
 import express from 'express';
-import conactRouter from './contact/contactRoutes';
-import listRouter from './list/listRoutes';
-import { PORT } from './infrastructureVariables';
-import List from './list/listModel';
-import Contact from './contact/contactModel';
-import ContactList from './contactList/contactListModel';
+import conactRouter from './contact/contact.routers';
+import listRouter from './list/list.routers';
+import { PORT } from './common/common.constants';
+import List from './list/list.model';
+import Contact from './contact/contact.model';
+import ContactList from './contactList/contact-list.model';
 
 const app = express();
 

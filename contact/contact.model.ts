@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 import sequelize from '../database/config';
-import { IContactModel } from './contactInterfaces';
+import { IContactModel } from './contact.interfaces';
 
 const Contact = sequelize.define<IContactModel>('contacts', {
   uuid: {

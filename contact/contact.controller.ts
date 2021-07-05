@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import ContactService from './сontactService';
+import ContactService from './сontact.services';
 
 export const postContact = async (
   res: Response,

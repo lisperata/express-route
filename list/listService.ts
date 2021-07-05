@@ -1,13 +1,38 @@
-import uuid from "uuid";
+import List from './listModel';
+import Contact from '../contact/contactModel';
+class ListService {
+  public static async getContactsOfListByListId(
+    listId: string
+  ): Promise<string> {
+    const list = await List.findByPk(listId);
 
-class List {
-  private uuid: string;
-  private name: string;
+    if (!list) {
+      throw new Error();
+    }
 
-  public constructor(name: string) {
-    this.uuid = uuid.v4();
-    this.name = name;
+    return await list.getContacts({
+      attributes: ['name', 'email'],
+      joinTableAttributes: ['listUuid'],
+    });
+  }
+
+  public static async addNewList(name: string): Promise<void> {
+    await List.create({ name });
+  }
+
+  public static async addContactToList(
+    uuidOfContact: string,
+    uuidOfList: string
+  ): Promise<void> {
+    const list = await List.findByPk(uuidOfList);
+    const contact = await Contact.findByPk(uuidOfContact);
+
+    if (!list || !contact) {
+      throw new Error();
+    }
+
+    await list.addContact(contact);
   }
 }
 
-export default List;
+export default ListService;

@@ -1,7 +1,8 @@
-import Sequelize from "sequelize";
-import sequelize from "../database/config";
+import Sequelize from 'sequelize';
+import sequelize from '../database/config';
+import { IContactModel } from './contactInterfaces';
 
-const contactSequelize = sequelize.define("contacts", {
+const Contact = sequelize.define<IContactModel>('contacts', {
   uuid: {
     type: Sequelize.UUID,
     primaryKey: true,
@@ -19,4 +20,4 @@ const contactSequelize = sequelize.define("contacts", {
   },
 });
 
-export default contactSequelize;
+export default Contact;

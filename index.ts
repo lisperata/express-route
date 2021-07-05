@@ -4,7 +4,7 @@ import listRouter from './list/list.routers';
 import { PORT } from './common/common.constants';
 import List from './list/list.model';
 import Contact from './contact/contact.model';
-import ContactList from './contactList/contact-list.model';
+import ContactList from './contact-list/contact-list.model';
 
 const app = express();
 

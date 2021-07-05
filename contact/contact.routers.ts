@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { postContact, putContact } from './contactController';
+import { postContact, putContact } from './contact.controller';
 
 const conactRouter = express.Router();
 

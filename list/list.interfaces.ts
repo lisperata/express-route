@@ -1,5 +1,5 @@
 import { Model } from 'sequelize/types';
-import { IContactModel } from '../contact/contactInterfaces';
+import { IContactModel } from '../contact/contact.interfaces';
 
 export interface IListModel extends Model {
   uuid: string;

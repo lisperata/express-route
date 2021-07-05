@@ -1,5 +1,5 @@
-import List from './listModel';
-import Contact from '../contact/contactModel';
+import List from './list.model';
+import Contact from '../contact/contact.model';
 class ListService {
   public static async getContactsOfListByListId(
     listId: string

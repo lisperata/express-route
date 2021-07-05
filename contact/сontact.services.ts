@@ -1,6 +1,6 @@
 import sequelize from '../database/config';
-import { NewContactInPatchType } from './contactInterfaces';
-import Contact from './contactModel';
+import { NewContactInPatchType } from './contact.interfaces';
+import Contact from './contact.model';
 
 class ContactService {
   public static async getContactsOfList(listId: string): Promise<string> {

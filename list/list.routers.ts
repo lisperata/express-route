@@ -3,7 +3,7 @@ import {
   changeTheListInContact,
   getContactsByListId,
   postList,
-} from './listController';
+} from './list.controller';
 
 const listRouter = express.Router();
 

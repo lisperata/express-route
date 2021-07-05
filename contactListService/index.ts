@@ -11,6 +11,7 @@ const app = express();
 app.use(express.urlencoded());
 app.use(conactRouter);
 app.use(listRouter);
+app.use(express.json());
 
 List.belongsToMany(Contact, { through: ContactList });
 Contact.belongsToMany(List, { through: ContactList });
